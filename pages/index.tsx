@@ -1,4 +1,4 @@
-import React, { useState } from "react"
+import React, { useState,ChangeEvent } from "react"
 
 import Button from "@material-ui/core/Button"
 import Card from "@material-ui/core/Card"
@@ -34,6 +34,13 @@ import FrontendLayout from "../components/FrontendLayout"
 import Head from "next/head"
 import Lightbox from "react-image-lightbox"
 import "react-image-lightbox/style.css"
+import type { AppProps } from 'next/app'
+import { useAppDispatch, useAppSelector } from '../hooks/store'
+
+import { AnyAction } from '@reduxjs/toolkit';
+
+
+
 const useStyles = makeStyles((theme) => ({
     "@global": {
         ul: {
@@ -118,22 +125,32 @@ const useStyles = makeStyles((theme) => ({
 
 const perPage = 6
 
-const Index = ({ match, location, history, staticTags }) => {
+
+
+type Props = {
+    match: any,
+    location:any,
+    history:any,
+    staticTags:any,
+}
+import { NextPage } from 'next/types';
+
+const Index: NextPage<Props> = ({ match, location, history, staticTags }) => {
     const classes = useStyles()
 
     const API_DOMAIN = process.env.NEXT_PUBLIC_API_DOMAIN
 
     const dispatch = useDispatch()
 
-    const { loading } = useSelector((state) => state.tags)
-    const portfoliosLoading = useSelector((state) => state.portfolios.loading)
-    const page = useSelector((state) => state.portfolios.page)
+    const { loading } = useAppSelector((state) => state.tags)
+    const portfoliosLoading = useAppSelector((state) => state.portfolios.loading)
+    const page = useAppSelector((state) => state.portfolios.page)
 
-    const tags = useSelector(tagsSelectors.selectAll)
-    const portfolios = useSelector(portfoliosSelectors.selectAll)
-    const total = useSelector((state) => state.portfolios.total)
+    const tags = useAppSelector(tagsSelectors.selectAll)
+    const portfolios = useAppSelector(portfoliosSelectors.selectAll)
+    const total = useAppSelector((state) => state.portfolios.total)
     let countPages = calcPages(perPage, total)
-    const images = []
+    const images: Array<string> = []
     //  useEffect(async () => {
     //dispatch(listTags(1))
 
@@ -144,22 +161,22 @@ const Index = ({ match, location, history, staticTags }) => {
     //   dispatch(listPortfolios(1, 6, tags))
     // }, [dispatch, tags])
 
-    const [isOpen, setIsOpen] = useState(false)
+   const [isOpen, setIsOpen] = useState(false)
     const [photoIndex, setPhotoIndex] = useState(0)
     const [tagFilter, setTagFilter] = useState([])
 
-    let setCurrentImage = (index) => {
+    let setCurrentImage = (index:number) => {
         setPhotoIndex(index)
         setIsOpen(true)
     }
 
-    let handletagFilter = async (id) => {
+    let handletagFilter = async (id: number) => {
         let tmpTagFilter = [...tagFilter]
-        var index = tmpTagFilter.indexOf(id)
+        var index = tmpTagFilter.indexOf(id as never)
         if (index !== -1) {
             tmpTagFilter.splice(index, 1)
         } else {
-            tmpTagFilter.push(id)
+            tmpTagFilter.push(id as never )
         }
 
         setTagFilter(tmpTagFilter)
@@ -167,7 +184,7 @@ const Index = ({ match, location, history, staticTags }) => {
         dispatch(getPortfolios({ page: 1, perPage, tags: tmpTagFilter }))
     }
 
-    let handleChangePage = (event, value) => {
+    let handleChangePage = (event:ChangeEvent, value:number) => {
         dispatch(getPortfolios({ page: value, perPage, tags: tagFilter }))
     }
 
@@ -216,7 +233,7 @@ const Index = ({ match, location, history, staticTags }) => {
                                         return (
                                             <li
                                                 key={tag.id}
-                                                className={tagFilter.includes(tag.id) ? "active" : ""}
+                                                className={tagFilter.includes(tag.id as never) ? "active" : ""}
                                             >
                                                 <Chip
                                                     label={tag.name}
@@ -306,7 +323,7 @@ const Index = ({ match, location, history, staticTags }) => {
                                 <div className={classes.paginatorContainer}>
                                     <Pagination
                                         page={parseInt(page)}
-                                        count={parseInt(countPages)}
+                                        count={countPages}
                                         onChange={handleChangePage}
                                         className={classes.pagination}
                                     />
@@ -332,13 +349,16 @@ const Index = ({ match, location, history, staticTags }) => {
     )
 }
 
-export const getStaticProps = wrapper.getStaticProps(
-    (store) =>
-    async ({ preview }) => {
-        await store.dispatch(getTags())
-        await store.dispatch(getPortfolios({ page: 1, perPage }))
+Index.getInitialProps = wrapper.getInitialPageProps(
+      ( store ) =>
+        async () => {
+            
+        await store.dispatch(getTags() as unknown as AnyAction)
+        await store.dispatch(getPortfolios({ page: 1, perPage}) as unknown as  AnyAction )
         return { revalidate: 60 }
-    }
-)
+
+                }
+
+);
 
 export default Index

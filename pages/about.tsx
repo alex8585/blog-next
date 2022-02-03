@@ -52,11 +52,23 @@ const useStyles = makeStyles((theme) => ({
     },
   },
 }))
-const About = ({ match, location, history }) => {
+
+
+type Props = {
+    match: any,
+    location:any,
+    history:any,
+    staticTags:any,
+}
+import { NextPage } from 'next/types';
+
+
+const About: NextPage<Props> = ({ match, location, history }) => {
   const classes = useStyles()
 
   return (
     <FrontendLayout>
+        <div>
       <Head>
         <title>About me</title>
         <meta name="description" content="About alex 85 page with contacts" />
@@ -79,7 +91,7 @@ const About = ({ match, location, history }) => {
               <Avatar
                 className={classes.large}
                 alt="Remy Sharp"
-                src={getImgUrl("thumbnail_profile_acc7f1cf03.jpg")}
+                src={getImgUrl("thumbnail_profile_acc7f1cf03.jpg")!}
               />
             </ButtonBase>
           </Grid>
@@ -114,7 +126,7 @@ const About = ({ match, location, history }) => {
                     <ListItem>
                       <ListItemAvatar>
                         <Avatar
-                          src={getImgUrl("thumbnail_gmail3_29ef9d63b6.png")}
+                          src={getImgUrl("thumbnail_gmail3_29ef9d63b6.png")!}
                         ></Avatar>
                       </ListItemAvatar>
                       <ListItemText primary="blyakher85@gmail.com" />
@@ -122,7 +134,7 @@ const About = ({ match, location, history }) => {
                     <ListItem>
                       <ListItemAvatar>
                         <Avatar
-                          src={getImgUrl("thumbnail_telegram2_407376bdb8.png")}
+                          src={getImgUrl("thumbnail_telegram2_407376bdb8.png")!}
                         ></Avatar>
                       </ListItemAvatar>
                       <ListItemText primary="@cumar85" />
@@ -130,7 +142,7 @@ const About = ({ match, location, history }) => {
                     <ListItem>
                       <ListItemAvatar>
                         <Avatar
-                          src={getImgUrl("thumbnail_skype2_bd6195992e.png")}
+                          src={getImgUrl("thumbnail_skype2_bd6195992e.png")!}
                         ></Avatar>
                       </ListItemAvatar>
                       <ListItemText primary="cumar8585" />
@@ -142,6 +154,7 @@ const About = ({ match, location, history }) => {
           </Grid>
         </Grid>
       </Container>
+  </div>
     </FrontendLayout>
   )
 }

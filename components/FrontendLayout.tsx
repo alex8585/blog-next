@@ -5,7 +5,18 @@ import CssBaseline from "@material-ui/core/CssBaseline"
 import Head from 'next/head';
 import Divider from '@material-ui/core/Divider';
 import React from "react"
-export default function FrontendLayout({ children }) {
+
+
+type Props  = {
+     children: JSX.Element,
+};
+
+
+
+
+
+
+const FrontendLayout: React.FC<Props> = ({ children }) =>  {
     return (
         <React.Fragment >
             <Head>
@@ -19,3 +30,4 @@ export default function FrontendLayout({ children }) {
     )
 
 }
+export default FrontendLayout

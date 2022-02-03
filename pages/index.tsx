@@ -28,7 +28,7 @@ import {
     portfoliosSelectors,
     getPortfolios,
 } from "../features/portfolios/portfoliosSlice"
-import { calcPages } from "../utils/utils.js"
+import { calcPages } from "../utils/utils"
 import Image from "next/image"
 import FrontendLayout from "../components/FrontendLayout"
 import Head from "next/head"
@@ -160,7 +160,7 @@ const Index: NextPage<Props> = ({ match, location, history, staticTags }) => {
     //   if(!tags.length) return
     //   dispatch(listPortfolios(1, 6, tags))
     // }, [dispatch, tags])
-
+{/* console.log(portfolios) */}
    const [isOpen, setIsOpen] = useState(false)
     const [photoIndex, setPhotoIndex] = useState(0)
     const [tagFilter, setTagFilter] = useState([])
@@ -190,6 +190,7 @@ const Index: NextPage<Props> = ({ match, location, history, staticTags }) => {
 
     return (
         <FrontendLayout>
+        <div>
             <Head>
                 <title>Portfolio</title>
                 <meta name="description" content="Welcome to alex85 portfolio page" />
@@ -274,7 +275,6 @@ const Index: NextPage<Props> = ({ match, location, history, staticTags }) => {
                                                         color="textSecondary"
                                                         component="p"
                                                     >
-                                                        {portfolio.description ? portfolio.description : ""}
                                                     </Typography>
                                                     <Paper component="ul" className={classes.paper}>
                                                         {[...portfolio.tags]
@@ -345,6 +345,7 @@ const Index: NextPage<Props> = ({ match, location, history, staticTags }) => {
                     }
                 />
             )}
+        </div>
         </FrontendLayout>
     )
 }

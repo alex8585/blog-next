@@ -53,10 +53,10 @@ const TopMenu = () => {
         </Typography>
         <nav className={classes.link}>
           <Link href="/">
-            <a className={asPath == "/" && "active"}>Portfolio</a>
+              <a className={asPath == "/" ? "active" : ""}>Portfolio</a>
           </Link>
           <Link href="/about">
-            <a className={asPath == "/about" && "active"}>About me</a>
+              <a className={asPath == "/about" ? "active":""}>About me</a>
           </Link>
         </nav>
       </Toolbar>

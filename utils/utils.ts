@@ -1,12 +1,12 @@
 import jwt from "jsonwebtoken"
 
-export const generateToken = (id) => {
-  return jwt.sign({ id }, process.env.JWT_SECRET, {
+export const generateToken = (id:number) => {
+  return jwt.sign({ id }, process.env.NEXT_PUBLIC_JWT_SECRET!, {
     expiresIn: "30d",
   })
 }
 
-export const calcPages = (pageSize, totalCount) => {
+export const calcPages = (pageSize:number, totalCount:number) => {
   return totalCount < pageSize ? 1 : Math.ceil(totalCount / pageSize)
 }
 

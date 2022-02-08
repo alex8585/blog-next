@@ -1,16 +1,16 @@
-import React from "react"
-import Box from "@material-ui/core/Box"
-import Copyright from "../components/Copyright"
-import Container from "@material-ui/core/Container"
-import Grid from "@material-ui/core/Grid"
-import { makeStyles } from "@material-ui/styles"
+import React from 'react'
+import Box from '@material-ui/core/Box'
+import Copyright from '../components/Copyright'
+import Container from '@material-ui/core/Container'
+import Grid from '@material-ui/core/Grid'
+import { makeStyles } from '@material-ui/styles'
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles(() => ({
   footer: {
-   // borderTop: `1px solid ${theme.palette.divider}`,
-    marginTop: "16px",
-    paddingTop: "16px",
-    paddingBottom: "6px",
+    // borderTop: `1px solid ${theme.palette.divider}`,
+    marginTop: '16px',
+    paddingTop: '16px',
+    paddingBottom: '6px',
     // [theme.breakpoints.up("sm")]: {
     //   paddingTop: theme.spacing(6),
     //   paddingBottom: theme.spacing(6),
@@ -18,12 +18,11 @@ const useStyles = makeStyles((theme) => ({
   },
 }))
 
-
 const Footer = () => {
   const classes = useStyles()
   return (
     <Container maxWidth="md" component="footer" className={classes.footer}>
-        <Grid container spacing={4}> 
+      <Grid container spacing={4}>
         {/* {footers.map((footer) => (
           <Grid item xs={6} sm={3} key={footer.title}>
             <Typography variant="h6" color="textPrimary" gutterBottom>

@@ -34,3 +34,4 @@ yarn-error.log*
 .vercel
 .env
 /tags
+/1.vim

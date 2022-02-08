@@ -5,7 +5,7 @@
     "strictNullChecks": true,
 
     "target": "es5",
-    "lib": ["es6","dom", "dom.iterable", "esnext"],
+    "lib": ["es6", "dom", "dom.iterable", "esnext"],
     "allowJs": true,
     "skipLibCheck": true,
     "strict": false,
@@ -18,10 +18,16 @@
     "isolatedModules": true,
     "jsx": "preserve",
     "baseUrl": ".",
-      "paths": {
-        "@/components/*": ["/components/*"],
-      }
+    "paths": {
+      "@/components/*": ["/components/*"]
+    }
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "pages/_document.js", "pages/_app.js"],
+  "include": [
+    "next-env.d.ts",
+    "**/*.ts",
+    "**/*.tsx",
+    "pages/_document.js",
+    "pages/_app.js"
+  ],
   "exclude": ["node_modules"]
 }

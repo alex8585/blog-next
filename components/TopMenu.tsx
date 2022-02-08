@@ -1,32 +1,32 @@
-import React from "react"
-import Typography from "@material-ui/core/Typography"
-import AppBar from "@material-ui/core/AppBar"
-import Toolbar from "@material-ui/core/Toolbar"
-import { makeStyles } from "@material-ui/styles"
+import React from 'react'
+import Typography from '@material-ui/core/Typography'
+import AppBar from '@material-ui/core/AppBar'
+import Toolbar from '@material-ui/core/Toolbar'
+import { makeStyles } from '@material-ui/styles'
 
-import Link from "next/link"
+import Link from 'next/link'
 
-import { useRouter } from "next/router"
-const useStyles = makeStyles((theme) => ({
+import { useRouter } from 'next/router'
+const useStyles = makeStyles(() => ({
   appBar: {
     //borderBottom: `1px solid ${theme.palette.divider}`,
   },
   toolbar: {
-    flexWrap: "wrap",
+    flexWrap: 'wrap',
   },
   toolbarTitle: {
     flexGrow: 1,
   },
   link: {
-    "& a": {
-      fontSize: "0.875rem",
-      fontWeight: "600",
-      lineHeight: "1.75",
-      letterSpacing: "0.02857em",
-      textTransform: "uppercase",
-      color: "rgba(0, 0, 0, 0.87)",
-      margin: "8px 12px",
-      textDecoration: "none",
+    '& a': {
+      fontSize: '0.875rem',
+      fontWeight: '600',
+      lineHeight: '1.75',
+      letterSpacing: '0.02857em',
+      textTransform: 'uppercase',
+      color: 'rgba(0, 0, 0, 0.87)',
+      margin: '8px 12px',
+      textDecoration: 'none',
     },
   },
 }))
@@ -53,10 +53,10 @@ const TopMenu = () => {
         </Typography>
         <nav className={classes.link}>
           <Link href="/">
-              <a className={asPath == "/" ? "active" : ""}>Portfolio</a>
+            <a className={asPath == '/' ? 'active' : ''}>Portfolio</a>
           </Link>
           <Link href="/about">
-              <a className={asPath == "/about" ? "active":""}>About me</a>
+            <a className={asPath == '/about' ? 'active' : ''}>About me</a>
           </Link>
         </nav>
       </Toolbar>

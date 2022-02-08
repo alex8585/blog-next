@@ -1,17 +1,17 @@
-import jwt from "jsonwebtoken"
+import jwt from 'jsonwebtoken'
 
-export const generateToken = (id:number) => {
-  return jwt.sign({ id }, process.env.NEXT_PUBLIC_JWT_SECRET!, {
-    expiresIn: "30d",
+export const generateToken = (id: number) => {
+  return jwt.sign({ id }, process.env.NEXT_PUBLIC_JWT_SECRET ?? '', {
+    expiresIn: '30d',
   })
 }
 
-export const calcPages = (pageSize:number, totalCount:number) => {
+export const calcPages = (pageSize: number, totalCount: number) => {
   return totalCount < pageSize ? 1 : Math.ceil(totalCount / pageSize)
 }
 
 export const getUserFromLocalStorage = () => {
-  const user = localStorage.getItem("user")
+  const user = localStorage.getItem('user')
   if (!user) {
     return null
   }
@@ -20,7 +20,7 @@ export const getUserFromLocalStorage = () => {
 }
 
 export const getUserTokenFromLocalStorage = () => {
-  let user = getUserFromLocalStorage()
+  const user = getUserFromLocalStorage()
   if (!user || !user.token) {
     return null
   }
@@ -28,13 +28,13 @@ export const getUserTokenFromLocalStorage = () => {
 }
 
 export const deleteUserFromLocalStorage = () => {
-  localStorage.removeItem("user")
+  localStorage.removeItem('user')
 }
 
-export function getImgUrl(img = "") {
-  img = img.replace(/^\/+/g, "")
+export function getImgUrl(img = '') {
+  img = img.replace(/^\/+/g, '')
   if (!img) {
-    return null
+    return ''
   }
-  return process.env.NEXT_PUBLIC_UPLOADS_URL + "/" + img
+  return process.env.NEXT_PUBLIC_UPLOADS_URL + '/' + img
 }

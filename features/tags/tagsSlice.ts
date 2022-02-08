@@ -1,57 +1,49 @@
-import { createSlice, createEntityAdapter, EntityState } from "@reduxjs/toolkit"
-import { getTagsThunk } from "./tagsThunks"
-
-
+import { createSlice, createEntityAdapter, EntityState } from '@reduxjs/toolkit'
+import { getTagsThunk } from './tagsThunks'
 
 interface Tag {
-    id: number
-    name: string
+  id: number
+  name: string
 }
 interface TagsState {
-    data:EntityState<Tag>
-    loading: boolean
+  data: EntityState<Tag>
+  loading: boolean
 }
 interface GlobalState {
-    tags: TagsState
+  tags: TagsState
 }
 
 const tagsAdapter = createEntityAdapter({
-    selectId: (tag: Tag) => tag.id,
+  selectId: (tag: Tag) => tag.id,
 })
 
-
-
 const initialState = {
-    data: tagsAdapter.getInitialState(),
-    loading: false,
+  data: tagsAdapter.getInitialState(),
+  loading: false,
 } as TagsState
 
 export const tagsSlice = createSlice({
-    name: "products",
-    initialState,
-    reducers: {},
-    extraReducers: (builder)=> {
+  name: 'products',
+  initialState,
+  reducers: {},
+  extraReducers: (builder) => {
+    builder.addCase(getTagsThunk.pending, (state) => {
+      state.loading = true
+    })
 
-        builder.addCase(getTagsThunk.pending ,(state, {payload}) => {
-            state.loading = true
-        })
+    builder.addCase(getTagsThunk.rejected, (state) => {
+      state.loading = false
+    })
 
-        builder.addCase(getTagsThunk.rejected ,(state, {payload}) => {
-            state.loading = false
-        })
-
-        builder.addCase(getTagsThunk.fulfilled ,(state, {payload}) => {
-            state.loading = false
-            tagsAdapter.setAll(state.data, payload.data.items)
-        })
-
-
-    },
+    builder.addCase(getTagsThunk.fulfilled, (state, { payload }) => {
+      state.loading = false
+      tagsAdapter.setAll(state.data, payload.data.items)
+    })
+  },
 })
 
-
 export const tagsSelectors = tagsAdapter.getSelectors(
-    (state: GlobalState) => state.tags.data
+  (state: GlobalState) => state.tags.data
 )
 
 export const getTags = getTagsThunk

@@ -9,16 +9,9 @@ import Grid from '@material-ui/core/Grid'
 
 import Typography from '@material-ui/core/Typography'
 
-import { makeStyles } from '@material-ui/styles'
 import Container from '@material-ui/core/Container'
 
-{
-  /* import { useDispatch } from "react-redux" */
-}
-
 import Pagination from '@material-ui/core/Pagination'
-
-import { red } from '@material-ui/core/colors'
 
 import Chip from '@material-ui/core/Chip'
 import Paper from '@material-ui/core/Paper'
@@ -39,88 +32,9 @@ import 'react-image-lightbox/style.css'
 import { useAppDispatch, useAppSelector } from '../hooks/store'
 
 import { AnyAction } from '@reduxjs/toolkit'
+import { NextPage } from 'next/types'
 
-const useStyles = makeStyles(() => ({
-  '@global': {
-    ul: {
-      margin: 0,
-      padding: 0,
-      listStyle: 'none',
-    },
-  },
-  link: {
-    margin: '5px 0px',
-  },
-  heroContent: {
-    padding: '20px 0px 5px',
-    maxWidth: '960px',
-    '& li div': { backgroundColor: '#e0e0e0' },
-  },
-  cardHeader: {
-    backgroundColor: '#e0e0e0',
-    marginBottom: '10px',
-  },
-  cardPricing: () => ({
-    display: 'flex',
-    justifyContent: 'center',
-    alignItems: 'baseline',
-    marginBottom: '15px',
-  }),
-
-  chip: () => ({
-    margin: '0px 5px',
-  }),
-  card: {
-    margin: '0 auto',
-    maxWidth: 345,
-  },
-  paper: () => ({
-    display: 'flex',
-    justifyContent: 'center',
-    flexWrap: 'wrap',
-    listStyle: 'none',
-    padding: '7px 10px',
-    marginBottom: 12,
-    '& .active .MuiButtonBase-root': {
-      backgroundColor: 'rgb(144, 131, 112)',
-    },
-  }),
-  media: {
-    height: 0,
-    paddingTop: '56.25%', // 16:9
-  },
-  expand: () => ({
-    transform: 'rotate(0deg)',
-    marginLeft: 'auto',
-  }),
-  expandOpen: {
-    transform: 'rotate(180deg)',
-  },
-  avatar: {
-    backgroundColor: red[500],
-  },
-  image: {
-    cursor: 'pointer',
-  },
-  button: {
-    marginTop: '15px',
-    width: '100%',
-    textAlign: 'center',
-  },
-  paginatorContainer: {
-    display: 'flex',
-    marginTop: 10,
-  },
-  pagination: {
-    margin: '0 auto',
-    '& ul': {
-      listStyle: 'none',
-      padding: 0,
-      margin: 0,
-      display: 'flex',
-    },
-  },
-}))
+import useStyles from '../pages_styles/index'
 
 const perPage = 6
 
@@ -130,7 +44,6 @@ type Props = {
   history: any
   staticTags: any
 }
-import { NextPage } from 'next/types'
 
 const Index: NextPage<Props> = () => {
   const classes = useStyles()
@@ -139,9 +52,6 @@ const Index: NextPage<Props> = () => {
 
   const dispatch = useAppDispatch()
 
-  {
-    /* const { loading } = useAppSelector((state) => state.tags) */
-  }
   const portfoliosLoading = useAppSelector((state) => state.portfolios.loading)
   const page = useAppSelector((state) => state.portfolios.page)
 
@@ -238,29 +148,26 @@ const Index: NextPage<Props> = () => {
           {!portfoliosLoading && (
             <div>
               <ul className={classes.paper}>
-                {[...tags]
-                  //.sort((a, b) => (a.order_number > b.order_number ? 1 : -1))
-                  .map((tag) => {
-                    return (
-                      <li
-                        key={tag.id}
-                        className={
-                          tagFilter.includes(tag.id as never) ? 'active' : ''
-                        }
-                      >
-                        <Chip
-                          label={tag.name}
-                          onClick={() => handletagFilter(tag.id)}
-                          className={classes.chip}
-                        />
-                      </li>
-                    )
-                  })}
+                {[...tags].map((tag) => {
+                  return (
+                    <li
+                      key={tag.id}
+                      className={
+                        tagFilter.includes(tag.id as never) ? 'active' : ''
+                      }
+                    >
+                      <Chip
+                        label={tag.name}
+                        onClick={() => handletagFilter(tag.id)}
+                        className={classes.chip}
+                      />
+                    </li>
+                  )
+                })}
               </ul>
 
               <Grid container spacing={5} alignItems="flex-end">
                 {portfolios.map((portfolio, i) => {
-                  // Enterprise card is full width at sm breakpoint
                   const fullImg = portfolio.image
                     ? API_DOMAIN + portfolio.image
                     : ''
@@ -291,20 +198,16 @@ const Index: NextPage<Props> = () => {
                             component="p"
                           ></Typography>
                           <Paper component="ul" className={classes.paper}>
-                            {[...portfolio.tags]
-                              // .sort((a, b) =>
-                              //  a.order_number > b.order_number ? 1 : -1
-                              //)
-                              .map((tag) => {
-                                return (
-                                  <li key={tag.id}>
-                                    <Chip
-                                      label={tag.name}
-                                      className={classes.chip}
-                                    />
-                                  </li>
-                                )
-                              })}
+                            {[...portfolio.tags].map((tag) => {
+                              return (
+                                <li key={tag.id}>
+                                  <Chip
+                                    label={tag.name}
+                                    className={classes.chip}
+                                  />
+                                </li>
+                              )
+                            })}
                           </Paper>
                           {portfolio.url.indexOf('github') !== -1 && (
                             <Button

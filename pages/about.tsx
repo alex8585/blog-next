@@ -3,7 +3,6 @@ import React from 'react'
 import Grid from '@material-ui/core/Grid'
 
 import Typography from '@material-ui/core/Typography'
-import { makeStyles } from '@material-ui/styles'
 
 import List from '@material-ui/core/List'
 import ListItem from '@material-ui/core/ListItem'
@@ -17,42 +16,8 @@ import Container from '@material-ui/core/Container'
 import FrontendLayout from '../components/FrontendLayout'
 import Head from 'next/head'
 import { getImgUrl } from '../utils/utils'
-const useStyles = makeStyles(() => ({
-  root: {
-    flexGrow: 1,
-    maxWidth: '960px',
-    margin: '0 auto',
-    marginTop: 50,
-  },
-  paper: {
-    padding: '12px',
-    marginTop: 20,
-    maxWidth: 960,
-  },
-  image: {
-    width: 128,
-    height: 128,
-  },
-  img: {
-    margin: 'auto',
-    display: 'block',
-    maxWidth: '100%',
-    maxHeight: '100%',
-  },
-  large: {
-    width: '120px',
-    height: '120px',
-  },
-  heroContent: {
-    padding: '20px 0px 5px',
-  },
-  ListItemText: {
-    '& .MuiTypography-body2': {
-      fontWeight: 'bold',
-    },
-  },
-}))
 
+import useStyles from '../pages_styles/about'
 type Props = {
   match?: any
   location?: any
@@ -120,7 +85,7 @@ const About: NextPage<Props> = () => {
                       <ListItemText primary="- JS / React.js / Vue.js" />
                     </ListItem>
                     <ListItem>
-                      <ListItemText primary="- MySQL / MogngoDB" />
+                      <ListItemText primary="- MySQL / PostgreSQL" />
                     </ListItem>
                     <ListItem>
                       <ListItemText primary="- Linux / Windows" />

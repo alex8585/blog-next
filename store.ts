@@ -21,15 +21,12 @@ const bindMiddleware = (middleware: Array<any>) => {
   return applyMiddleware(...middleware)
 }
 
-const combinedReducer = combineReducers({
+const rootReducer = combineReducers({
   tags: tagsSlice,
   portfolios: portfoliosSlice,
 })
 
-const reducer = (
-  state: ReturnType<typeof combinedReducer>,
-  action: AnyAction
-) => {
+const reducer: any = (state: RootState, action: AnyAction) => {
   if (action.type === HYDRATE) {
     const nextState = {
       ...state, // use previous state
@@ -37,7 +34,7 @@ const reducer = (
     }
     return nextState
   } else {
-    return combinedReducer(state, action)
+    return rootReducer(state, action)
   }
 }
 
@@ -61,7 +58,3 @@ export type AppThunk<ReturnType = void> = ThunkAction<
   unknown,
   Action<string>
 >
-// Infer the `RootState` and `AppDispatch` types from the store itself
-// export type RootState = ReturnType<typeof store.getState>
-// Inferred type: {posts: PostsState, comments: CommentsState, users: UsersState}
-// export type AppDispatch = typeof store.dispatch
